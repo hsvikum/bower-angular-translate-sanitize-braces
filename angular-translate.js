@@ -1,5 +1,6 @@
 /*!
- * angular-translate - v2.13.1 - 2016-12-06
+ * angular-translate - v2.13.2 - 2020-05-22
+ * resolving xss issue in the translate directive
  * 
  * Copyright (c) 2016 The angular-translate team, Pascal Precht; Licensed MIT
  */
