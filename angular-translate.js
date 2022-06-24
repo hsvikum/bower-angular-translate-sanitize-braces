@@ -1,5 +1,5 @@
 /*!
- * angular-translate - v2.13.2 - 2020-05-22
+ * angular-translate - v2.13.3 - 2022-06-24
  * resolving xss issue in the translate directive
  * 
  * Copyright (c) 2016 The angular-translate team, Pascal Precht; Licensed MIT
@@ -3649,6 +3649,14 @@ function translateFilterFactory($parse, $translate) {
   var translateFilter = function (translationId, interpolateParams, interpolation, forceLanguage) {
     if (!angular.isObject(interpolateParams)) {
       interpolateParams = $parse(interpolateParams)(this);
+    }
+
+    function sanitizeBraces(input) {
+      return typeof input === 'string' ? input.replace(/{{/g, "\\{\\{").replace(/}}/g, "\\}\\}") : input;
+    }
+
+    if (interpolateParams === undefined) {
+      translationId = sanitizeBraces(translationId);
     }
 
     return $translate.instant(translationId, interpolateParams, interpolation, forceLanguage);
